@@ -7,11 +7,13 @@ load_dotenv()
 
 errors = []
 
+
 def load_or_error(key: str) -> str:
     value = os.environ.get(key)
     if not value:
         errors.append(f"Environment variable [bold red]{key}[/bold red] is not set.")
     return value
+
 
 MODEL_NAME = load_or_error("MODEL_NAME")
 OPENROUTER_API_KEY = load_or_error("OPENROUTER_API_KEY")
