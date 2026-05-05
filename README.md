@@ -21,3 +21,5 @@ Run the Web UI:
 ```sh
 uv run chainlit run src/mvc/frontends/web/app.py -w
 ```
+
+- `-w` is for hot-reloading (automatic restart when code updates are saved)
