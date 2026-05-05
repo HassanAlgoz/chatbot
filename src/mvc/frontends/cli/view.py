@@ -28,12 +28,7 @@ class SupportBotApp(App):
     def compose(self) -> ComposeResult:
         yield Header()
         with VerticalScroll(id="chat_area"):
-            lines = [
-                "# Customer Support Bot",
-                "To help you I need to know your name.",
-                "What is your name?",
-            ]
-            yield Markdown(markdown="\n".join(lines), id="history")
+            yield Markdown(markdown=self.workflow.messages_to_markdown(), id="history")
             with Horizontal(id="loading_row", classes="hidden"):
                 yield LoadingIndicator()
                 yield Static("Computing answer...", id="loading_message")
@@ -44,35 +39,24 @@ class SupportBotApp(App):
         pass
 
     async def on_input_submitted(self, event: Input.Submitted) -> None:
-        user_text = event.value.strip()
-        if not user_text:
+        user_msg = event.value.strip()
+        if not user_msg:
             return
-
-        # UI Update: Clear input and show user message
+        
+        # UI Update: Clear input and show user message, and bot
         event.input.value = ""
-        history = self.query_one("#history", Markdown)
-        history.update(history._markdown + f"\n\n**You**: {user_text}")
+        messages = self.workflow.messages_to_markdown()
+        buffer = (
+            messages +
+            "\n\n **👤 User**: " + user_msg +
+            "\n\n **🤖 Bot**: "
+        )
+        widget = self.query_one("#history", Markdown)
+        widget.update(buffer)
 
-        # Run LangGraph in a worker on the main loop; block in a thread pool so the UI can repaint.
-        self.run_worker(self.run_workflow(user_text))
-
-    async def run_workflow(self, user_text: str):
-        # Loading indicator
-        loading_row = self.query_one("#loading_row", Horizontal)
-        loading_row.remove_class("hidden")
-        self.query_one("#chat_area").scroll_end(animate=True)
-
-        # Run the workflow
-        try:
-            # Invoke the graph with current state (blocking LLM calls must not run on the UI thread).
-            new_state = await asyncio.to_thread(self.workflow.run, user_text=user_text)
-            bot_response = f"\n\n**🤖 Bot**: {new_state['ai_message']}"
-
-            # UI Update: Bot response
-            history = self.query_one("#history", Markdown)
-            history.update(history._markdown + bot_response)
-        finally:
-            loading_row.add_class("hidden")
-
-        # Scroll to bottom
-        self.query_one("#chat_area").scroll_end(animate=True)
+        # Pass new message to workflow and stream the response into the UI
+        async for chunk in self.workflow.astream(message=user_msg):
+            buffer += chunk
+            widget.update(buffer)
+            # sleep to simulate typing
+            await asyncio.sleep(0.05)
