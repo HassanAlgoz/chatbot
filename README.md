@@ -1,6 +1,10 @@
 # Example Chatbot CLI with LangGraph using the MVC Pattern
 
-A demonstration of chatbots that cope with mistakes, deal with naturally random human chat interactions like answering not the direct question and correcting previous inforamtion. All while being long-running reliablly, pausable & resumable as well as being focused on its objective of information gathering.
+Demonstrates how one Agentic runtime backend ([`src/mvc/model.py`](src/mvc/model.py)), is used in multiple frontends:
+
+1. CLI in the Terminal
+2. Web UI in the Browser
+3. Telegram Bot via Telegram App
 
 ## Install Dependencies
 
