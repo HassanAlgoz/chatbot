@@ -8,18 +8,24 @@ A demonstration of chatbots that cope with mistakes, deal with naturally random 
 uv sync
 ```
 
-## Usage
+## Frontends
 
-Run the CLI:
+### Run the CLI:
 
 ```sh
 uv run python -m mvc.frontends.cli.main
 ```
 
-Run the Web UI:
+### Run the Web UI:
 
 ```sh
 uv run chainlit run src/mvc/frontends/web/app.py -w
 ```
 
 - `-w` is for hot-reloading (automatic restart when code updates are saved)
+
+### Run the Telegram Bot:
+
+```sh
+uv run python -m mvc.frontends.telegram.main
+```

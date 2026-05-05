@@ -17,6 +17,7 @@ def load_or_error(key: str) -> str:
 
 MODEL_NAME = load_or_error("MODEL_NAME")
 OPENROUTER_API_KEY = load_or_error("OPENROUTER_API_KEY")
+TELEGRAM_BOT_TOKEN = load_or_error("TELEGRAM_BOT_TOKEN")
 
 if errors:
     for error in errors:

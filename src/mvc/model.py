@@ -1,9 +1,7 @@
 import io
-from uuid import uuid4
 
 from langchain_core.messages import AIMessage, BaseMessage, SystemMessage, HumanMessage
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnableConfig
 from langchain_openai import ChatOpenAI
 
 
