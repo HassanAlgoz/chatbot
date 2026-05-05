@@ -11,3 +11,11 @@ dependencies = [
     "python-dotenv>=1.2.2",
     "textual>=8.2.5",
 ]
+
+[build-system]
+requires = ["uv_build>=0.11.8,<0.12"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "mvc_langgraph"
+module-root = "src"
