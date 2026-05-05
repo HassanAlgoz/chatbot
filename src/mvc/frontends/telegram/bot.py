@@ -2,7 +2,7 @@ from langchain_openai import ChatOpenAI
 from telegram import Update
 from telegram.ext import ContextTypes
 
-from mvc.config import TELEGRAM_BOT_TOKEN
+from mvc.frontends.telegram.config import TELEGRAM_BOT_TOKEN
 from mvc.model import Workflow
 
 

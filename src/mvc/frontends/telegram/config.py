@@ -1,4 +1,4 @@
-"""Loads backend configuration from the environment variables."""
+"""Loads only the Telegram bot configs."""
 import os
 
 from rich import print as rprint
@@ -15,9 +15,7 @@ def load_or_error(key: str) -> str:
         errors.append(f"Environment variable [bold red]{key}[/bold red] is not set.")
     return value
 
-
-MODEL_NAME = load_or_error("MODEL_NAME")
-OPENROUTER_API_KEY = load_or_error("OPENROUTER_API_KEY")
+TELEGRAM_BOT_TOKEN = load_or_error("TELEGRAM_BOT_TOKEN")
 
 if errors:
     for error in errors:
