@@ -4,7 +4,7 @@ from textual.app import App, ComposeResult
 from textual.widgets import Header, Footer, Input, Markdown, Static, LoadingIndicator
 from textual.containers import VerticalScroll, Horizontal
 
-from mvc_langgraph.model import Workflow
+from mvc.model import Workflow
 
 
 class SupportBotApp(App):

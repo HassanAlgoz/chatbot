@@ -13,5 +13,5 @@ uv sync
 Run the CLI:
 
 ```sh
-uv run python -m mvc_langgraph.frontends.cli.main
+uv run python -m mvc.frontends.cli.main
 ```

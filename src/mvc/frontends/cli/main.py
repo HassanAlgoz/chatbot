@@ -1,8 +1,8 @@
-from mvc_langgraph.model import Workflow
-from mvc_langgraph.frontends.cli.view import SupportBotApp
-from mvc_langgraph.services.llm import new_llm
+from mvc.model import Workflow
+from mvc.frontends.cli.view import SupportBotApp
+from mvc.services.llm import new_llm
 
-from mvc_langgraph.config import MODEL_NAME, OPENROUTER_API_KEY
+from mvc.config import MODEL_NAME, OPENROUTER_API_KEY
 
 if __name__ == "__main__":
     llm = new_llm(
